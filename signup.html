@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traveloop Signup</title>
+</head>
+<body>
+  <form id="form">
+    <h2>Traveloop Signup Form</h2>
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" placeholder="Enter your name"><br>
+    <span id="name_error" style="color:red;"></span><br><br>
+    
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" placeholder="Enter your email"><br>
+    <span id="email_error" style="color:red;"></span><br><br>
+    
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" placeholder="Enter your password"><br>
+    <span id="password_error" style="color:red;"></span><br><br>
+    
+    <button type="submit" id="submit">Submit</button>
+  </form>
+
+  <script>
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const form = document.getElementById('form');
+    const name_error = document.getElementById('name_error');
+    const email_error = document.getElementById('email_error');
+    const password_error = document.getElementById('password_error');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); // Prevent the default form submission
+
+      const email_check = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      let isValid = true; // Flag to track validation status
+
+      // Name validation
+      if (name.value.trim() === '') {
+        name_error.innerHTML = "Name is required";
+        isValid = false; // Set isValid to false
+      } else {
+        name_error.innerHTML = ""; // Clear error message
+      }
+
+      // Email validation
+      if (!email.value.match(email_check)) {
+        email_error.innerHTML = "Valid email is required";
+        isValid = false; // Set isValid to false
+      } else {
+        email_error.innerHTML = ""; // Clear error message
+      }
+
+      // Password validation
+      if (password.value.length < 6) {
+        password_error.innerHTML = "Password must be more than 6 characters.";
+        isValid = false; // Set isValid to false
+      } else if (password.value.length > 20) {
+        password_error.innerHTML = "Password cannot be more than 20 characters.";
+        isValid = false; // Set isValid to false
+      } else {
+        password_error.innerHTML = ""; // Clear error message
+      }
+
+      // If all fields are valid, redirect to the new page
+      if (isValid) {
+        window.location.href = "index.html"; // Ensure this is the correct page
+      }
+    });
+  </script>
+</body>
+</html>
