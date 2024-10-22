@@ -244,7 +244,8 @@ margin: 0 10%;
 
 .section4 {
   position: relative;
-  height: 800px;
+  height: 100vh;
+  margin: 0;
   margin-top: 100px;
   overflow: hidden;
 }
@@ -317,9 +318,53 @@ margin: 0 10%;
   position: absolute;
   bottom: 0; /* Stick to the bottom */
   top: 70%;
-  left: 50%;
+  left: 50%; 
   transform: translateX(-50%);
   width: 100%; /* Full width of the section */
   height: auto; /* Maintain aspect ratio */
-  z-index: 2; /* Above background but below other content */
+  z-index: 1; /* Above background but below other content */
+}
+
+.section5 {
+  margin: 0; /* Remove unwanted margin */
+  padding: 50px 10px; /* Add padding for better spacing */
+  background-color: #000;
+}
+
+.section5 .form {
+  height: 500px;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.2);
+  background-color: plum;
+}
+
+.section5 .form input {
+  border-radius: 50px;
+  width: 400px;
+  border: 0;
+  height: 30px;
+}
+
+.section5 .form input:last-of-type {
+  height: 80px;
+  border-radius: 20px;
+}
+
+.section5 .form .send{
+  border-radius: 30px;
+  width: 150px;
+  height: 50px;
+  border: 0;
+  background-color: #000;
+  color: plum;
+}
+
+.section5 h2 {
+  padding-bottom: 20px;
 }
