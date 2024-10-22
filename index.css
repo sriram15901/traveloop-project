@@ -242,23 +242,84 @@ margin: 0 10%;
   margin-top: 100px;
 }
 
-.section4 .background{
-  background-image: url('section4bg.jpg');
-  background-size: cover;
+.section4 {
+  position: relative;
   height: 800px;
   margin-top: 100px;
-  opacity: 0.5;
+  overflow: hidden;
 }
 
-.section4 img {
+.section4 .background {
+  background-image: url('section4bg.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 70%;
+  width: 100%;
+  opacity: 0.5; /* Background transparency */
   position: relative;
-  /* z-index: 2;  */
-  width: 300px; 
-  height: 300px;
-  margin-top: -1200px;
-  margin-left: 600px;
 }
 
-.section4 marquee{
-  margin-top: -1100px;
+/* Centered top image inside the section */
+.section4 img {
+  position: absolute;
+  top: 20%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  z-index: 2; /* Ensure it stays above the background */
+}
+
+/* Text inside the top image */
+.section4 h3 {
+  position: absolute;
+  top: 18%; /* Adjust position for better alignment */
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  z-index: 3; /* Above the image */
+  text-align: center; /* Center the text */
+}
+
+/* Circle background for h3 */
+.section4 h3::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px; /* Circle diameter */
+  height: 150px; /* Circle diameter */
+  background-color: plum; /* Circle color */
+  border-radius: 50%; /* Make it a circle */
+  transform: translate(-50%, -50%); /* Center it */
+  z-index: -1; /* Place it behind the text */
+}
+
+.section4 .description {
+  position: absolute;
+  bottom: 20px; /* Positioning at the bottom of the section */
+  bottom: 230px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: black;
+  font-size: 20px; /* Adjust size as needed */
+  text-align: center;
+  max-width: 800px; /* Set max width for better layout */
+  z-index: 3; /* Above the background */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Shadow for better readability */
+  padding: 0  10px; /* Optional: Add some padding for better spacing */
+}
+
+.section4 .footer-image {
+  position: absolute;
+  bottom: 0; /* Stick to the bottom */
+  top: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%; /* Full width of the section */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 2; /* Above background but below other content */
 }
