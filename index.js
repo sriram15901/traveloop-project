@@ -8,8 +8,8 @@ window.onload = function() {
   }, 10000);
 }
 
-// Initialize the booking status from localStorage (default to false if not found)
-let isBooked = localStorage.getItem('isBooked') === 'true';
+// Initialize the booking status (default to false)
+let isBooked = false;
 
 // Function to handle booking logic
 function handleBooking() {
@@ -17,10 +17,10 @@ function handleBooking() {
     alert("You have already booked. Wait for the confirmation.");
   } else {
     isBooked = true; // Mark the booking as done
-    localStorage.setItem('isBooked', 'true'); // Save to localStorage
     window.location.href = "booknow.html"; // Redirect to booking page
   }
 }
+
 
 // Add event listeners to both buttons
 document.getElementById('booknow').addEventListener('click', handleBooking);
