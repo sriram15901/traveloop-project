@@ -328,7 +328,7 @@ margin: 0 10%;
 .section5 {
   margin: 0; /* Remove unwanted margin */
   padding: 50px 10px; /* Add padding for better spacing */
-  background-color: #000;
+  /* background-color: #000; */
 }
 
 .section5 .form {

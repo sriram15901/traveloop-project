@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>traveloop-booking</title>
+  <style>
+   * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background-image: url('./booking-background.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form Container */
+.form-container {
+  background-color: rgba(255, 255, 255, 0.7); /* More transparent white background */
+  padding: 40px;
+  border-radius: 15px;
+  width: 450px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow effect */
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Slightly more visible border */
+}
+
+h2, h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  color: #333; /* Keep label color dark for visibility */
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent input */
+  font-size: 16px;
+}
+
+input:focus, select:focus {
+  border-color: #3498db;
+  outline: none;
+  background-color: rgba(234, 246, 255, 0.8); /* Semi-transparent on focus */
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .form-container {
+    width: 90%;
+    padding: 30px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Book Your Trip</h2>
+ 
+    <form id="bookingForm">
+      <h3>Personal Details</h3>
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" required />
+
+      <label for="phone">Phone Number:</label>
+      <input type="text" id="phone" placeholder="Enter your phone number" required />
+
+      <h3>Trip Details</h3>
+      <label for="country">Select Country:</label>
+      <select id="country" required>
+        <option value="">Choose a country</option>
+        <option value="USA">USA</option>
+        <option value="Canada">Canada</option>
+        <option value="Australia">Australia</option>
+        <option value="India">India</option>
+        <option value="UK">UK</option>
+      </select>
+
+      <label for="city">Select City:</label>
+      <select id="city" required>
+        <option value="">Choose a city</option>
+      </select>
+
+      <label for="travelDate">Travel Date:</label>
+      <input type="date" id="travelDate" required />
+
+      <h3>Accommodation</h3>
+      <label for="hotel">Select Hotel:</label>
+      <select id="hotel" required>
+        <option value="">Choose a hotel</option>
+        <!-- Hotels will be populated based on city selection -->
+      </select>
+
+      <button type="submit">Submit Booking</button>
+    </form>
+  </div>
+
+  <script>
+    const countryCityMap = {
+      USA: ['New York', 'Los Angeles', 'Chicago'],
+      Canada: ['Toronto', 'Vancouver', 'Montreal'],
+      Australia: ['Sydney', 'Melbourne', 'Brisbane'],
+      India: ['Mumbai', 'Delhi', 'Bengaluru', 'Chennai'],
+      UK: ['London', 'Manchester', 'Birmingham']
+    };
+
+    const cityHotelMap = {
+      'New York': ['The Grand Palace Hotel', 'City Center Inn'],
+      'Los Angeles': ['Seaside Resort & Spa', 'Sunset Paradise Hotel'],
+      'Chicago': ['Mountain View Retreat', 'Royal Garden Suites'],
+      'Toronto': ['Lakeside Lodge', 'City Center Inn'],
+      'Vancouver': ['Seaside Resort & Spa', 'Royal Garden Suites'],
+      'Montreal': ['The Grand Palace Hotel', 'Mountain View Retreat'],
+      'Sydney': ['City Center Inn', 'Sunset Paradise Hotel'],
+      'Melbourne': ['The Grand Palace Hotel', 'Royal Garden Suites'],
+      'Brisbane': ['Seaside Resort & Spa', 'Lakeside Lodge'],
+      'Mumbai': ['Royal Garden Suites', 'Mountain View Retreat'],
+      'Delhi': ['The Grand Palace Hotel', 'Sunset Paradise Hotel'],
+      'Bengaluru': ['City Center Inn', 'Seaside Resort & Spa'],
+      'Chennai': ['Taj Coromandel', 'Radisson Blu Hotel', 'Hotel Greens Gate'],
+      'London': ['The Grand Palace Hotel', 'Royal Garden Suites'],
+      'Manchester': ['Sunset Paradise Hotel', 'Mountain View Retreat'],
+      'Birmingham': ['Seaside Resort & Spa', 'Lakeside Lodge']
+    };
+
+    const countrySelect = document.getElementById('country');
+    const citySelect = document.getElementById('city');
+    const hotelSelect = document.getElementById('hotel');
+
+    countrySelect.addEventListener('change', function() {
+      const selectedCountry = this.value;
+      citySelect.innerHTML = '<option value="">Choose a city</option>'; // Reset cities
+      hotelSelect.innerHTML = '<option value="">Choose a hotel</option>'; // Reset hotels
+
+      if (selectedCountry) {
+        const cities = countryCityMap[selectedCountry];
+        cities.forEach(city => {
+          const option = document.createElement('option');
+          option.value = city;
+          option.textContent = city;
+          citySelect.appendChild(option);
+        });
+      }
+    });
+
+    citySelect.addEventListener('change', function() {
+      const selectedCity = this.value;
+      hotelSelect.innerHTML = '<option value="">Choose a hotel</option>'; // Reset hotels
+
+      if (selectedCity) {
+        const hotels = cityHotelMap[selectedCity];
+        hotels.forEach(hotel => {
+          const option = document.createElement('option');
+          option.value = hotel;
+          option.textContent = hotel;
+          hotelSelect.appendChild(option);
+        });
+      }
+    });
+
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent form from reloading the page
+
+      const name = document.getElementById('name').value;
+      alert(`Thank you, ${name}! We will call you soon.`); // Confirmation message
+      window.location.href = "index.html"; // Redirect back to index page
+    });
+  </script>
+</body>
+</html>

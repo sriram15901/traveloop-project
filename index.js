@@ -1,20 +1,32 @@
-let isBooked = false;
+window.onload = function() {
+  setTimeout(function() {
+    const userResponse = confirm("Please sign up to get the most out of our site!");
 
-document.getElementById('booknow').addEventListener('click', function() {
-  if (!isBooked) {
-  alert("Thank You for choosing us! You're booking is in progress wait we'll call you soon");
-  // alert("we'll call you later");
-  isBooked = true;
-  } else {
-    alert("You alredy booked to other")
-  }
-});
+    if (userResponse) {
+      window.location.href = "signup.html";
+    }
+  }, 10000);
+}
 
-document.getElementById('book-btn').addEventListener('click', function(){
-  if(isBooked) {
-    alert("You already booked to santorini!");
+// Initialize the booking status from localStorage (default to false if not found)
+let isBooked = localStorage.getItem('isBooked') === 'true';
+
+// Function to handle booking logic
+function handleBooking() {
+  if (isBooked) {
+    alert("You have already booked. Wait for the confirmation.");
   } else {
-    alert("Thank You for choosing us! You're booking is in progress wait we'll call you soon.");
-    isBooked = true;
+    isBooked = true; // Mark the booking as done
+    localStorage.setItem('isBooked', 'true'); // Save to localStorage
+    window.location.href = "booknow.html"; // Redirect to booking page
   }
-});
+}
+
+// Add event listeners to both buttons
+document.getElementById('booknow').addEventListener('click', handleBooking);
+document.getElementById('book-btn').addEventListener('click', handleBooking);
+
+
+    document.getElementById('send-btn').addEventListener('click', function() {
+      alert("Thank You for your response! 😊")
+    })
